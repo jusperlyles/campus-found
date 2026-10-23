@@ -20,7 +20,17 @@ export function ItemCard({ item }: { item: Item }) {
 
   return (
     <article className="overflow-hidden rounded-2xl bg-card shadow-card">
-      {item.photo_url && <img src={item.photo_url} alt={item.name} className="h-44 w-full object-cover" loading="lazy" />}
+      <div className="relative aspect-[4/3] w-full bg-secondary">
+        {item.photo_url ? (
+          <img src={item.photo_url} alt={item.name} className="h-full w-full object-cover" loading="lazy" />
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted-foreground">
+            <Icon className="h-14 w-14" />
+            <span className="text-xs">No photo provided</span>
+          </div>
+        )}
+        <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-bold uppercase ${item.kind === "lost" ? "bg-lost text-lost-foreground" : "bg-found text-found-foreground"}`}>{item.kind}</span>
+      </div>
       <div className="p-4">
         <div className="flex items-start gap-3">
           <div className={`rounded-xl p-2.5 ${item.kind === "lost" ? "bg-lost text-lost-foreground" : "bg-found text-found-foreground"}`}>
