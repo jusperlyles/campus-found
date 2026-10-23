@@ -13,7 +13,7 @@ export const CATEGORIES: { value: string; label: string; icon: LucideIcon }[] = 
   { value: "other", label: "Other", icon: Package },
 ];
 
-export const categoryOf = (v: string) => CATEGORIES.find((c) => c.value === v) ?? CATEGORIES[5];
+export const categoryOf = (v: string) => CATEGORIES.find((c) => c.value === v) ?? CATEGORIES[5]!;
 
 export const LOCATIONS = [
   "Near City Garden Hostel",

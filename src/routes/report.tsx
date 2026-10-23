@@ -71,8 +71,8 @@ function Report() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !location.trim() || !date) return toast.error("Please fill in all required fields");
-    if (!PHONE_RE.test(phone)) return toast.error("Phone must be 10 digits, e.g. 0779123456");
+    if (!name.trim() || !location.trim() || !date) { toast.error("Please fill in all required fields"); return; }
+    if (!PHONE_RE.test(phone)) { toast.error("Phone must be 10 digits, e.g. 0779123456"); return; }
     setBusy(true);
     try {
       const photo_url = photo ? await upload(photo, photo.name.split(".").pop() || "jpg") : null;

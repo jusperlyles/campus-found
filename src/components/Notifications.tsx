@@ -40,7 +40,7 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
   }, [qc]);
 
   const enable = async () => {
-    if (!("Notification" in window)) return toast.error("This browser doesn't support alerts");
+    if (!("Notification" in window)) { toast.error("This browser does not support alerts"); return; }
     const p = await Notification.requestPermission();
     setPermission(p);
     if (p === "granted") toast.success("Alerts on — we'll ping you about new items");
