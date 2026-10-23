@@ -29,6 +29,6 @@ export const LOCATIONS = [
 export const PHONE_RE = /^0\d{9}$/;
 
 export function waLink(phone: string, text: string) {
-  const intl = "263" + phone.slice(1);
+  const intl = "256" + phone.slice(1);
   return `https://wa.me/${intl}?text=${encodeURIComponent(text)}`;
 }
