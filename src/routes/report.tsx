@@ -113,6 +113,23 @@ function Report() {
         </div>
 
         <div>
+          <span className={label}>Photo of the item</span>
+          <input ref={libRef} type="file" accept="image/*" hidden onChange={(e) => setPhoto(e.target.files?.[0] ?? null)} />
+          <input ref={camRef} type="file" accept="image/*" capture="environment" hidden onChange={(e) => setPhoto(e.target.files?.[0] ?? null)} />
+          {photo ? (
+            <div className="relative">
+              <img src={URL.createObjectURL(photo)} alt="Preview" className="aspect-[4/3] w-full rounded-xl object-cover" />
+              <button type="button" onClick={() => setPhoto(null)} aria-label="Remove photo" className="absolute right-2 top-2 rounded-full bg-card p-1.5"><X className="h-4 w-4" /></button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-2">
+              <button type="button" onClick={() => libRef.current?.click()} className="flex items-center justify-center gap-2 rounded-xl border border-dashed bg-card py-10 text-sm font-medium"><ImageIcon className="h-5 w-5" /> From library</button>
+              <button type="button" onClick={() => camRef.current?.click()} className="flex items-center justify-center gap-2 rounded-xl border border-dashed bg-card py-10 text-sm font-medium"><Camera className="h-5 w-5" /> Take photo</button>
+            </div>
+          )}
+        </div>
+
+        <div>
           <span className={label}>Category</span>
           <div className="grid grid-cols-3 gap-2">
             {CATEGORIES.map(({ value, label: l, icon: Icon }) => (
@@ -182,23 +199,6 @@ function Report() {
           <input id="phone" required inputMode="numeric" maxLength={10} value={phone}
             onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
             placeholder="0779XXXXXX" className={`${field} tracking-wider`} />
-        </div>
-
-        <div>
-          <span className={label}>Photo</span>
-          <input ref={libRef} type="file" accept="image/*" hidden onChange={(e) => setPhoto(e.target.files?.[0] ?? null)} />
-          <input ref={camRef} type="file" accept="image/*" capture="environment" hidden onChange={(e) => setPhoto(e.target.files?.[0] ?? null)} />
-          {photo ? (
-            <div className="relative">
-              <img src={URL.createObjectURL(photo)} alt="Preview" className="h-48 w-full rounded-xl object-cover" />
-              <button type="button" onClick={() => setPhoto(null)} aria-label="Remove photo" className="absolute right-2 top-2 rounded-full bg-card p-1.5"><X className="h-4 w-4" /></button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 gap-2">
-              <button type="button" onClick={() => libRef.current?.click()} className="flex items-center justify-center gap-2 rounded-xl border border-dashed bg-card py-5 text-sm font-medium"><ImageIcon className="h-5 w-5" /> From library</button>
-              <button type="button" onClick={() => camRef.current?.click()} className="flex items-center justify-center gap-2 rounded-xl border border-dashed bg-card py-5 text-sm font-medium"><Camera className="h-5 w-5" /> Take photo</button>
-            </div>
-          )}
         </div>
 
         <button disabled={busy} className="w-full rounded-2xl bg-accent py-4 font-display text-lg font-bold text-accent-foreground disabled:opacity-60">
